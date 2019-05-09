@@ -237,11 +237,11 @@ impl AtomType {
             pub struct #static_set_name;
             impl ::string_cache::StaticAtomSet for #static_set_name {
                 fn get() -> &'static ::string_cache::PhfStrSet {
+                    #[allow(clippy::unreadable_literal)]
                     static SET: ::string_cache::PhfStrSet = ::string_cache::PhfStrSet {
                         key: #key,
                         disps: &[#((#disps0, #disps1)),*],
                         atoms: &[#(#atoms_ref),*],
-                        #[allow(clippy::unreadable_literal)]
                         hashes: &[#(#hashes),*]
                     };
                     &SET
@@ -255,8 +255,8 @@ impl AtomType {
             macro_rules! #macro_name {
                 #(
                     (#atoms_ref) => {
+                        #[allow(clippy::unreadable_literal)]
                         $crate::#path {
-                            #[allow(clippy::unreadable_literal)]
                             unsafe_data: #data,
                             phantom: ::std::marker::PhantomData,
                         }
