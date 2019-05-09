@@ -256,6 +256,7 @@ impl AtomType {
                 #(
                     (#atoms_ref) => {
                         $crate::#path {
+                            #[allow(clippy::unreadable_literal)]
                             unsafe_data: #data,
                             phantom: ::std::marker::PhantomData,
                         }
