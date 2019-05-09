@@ -241,6 +241,7 @@ impl AtomType {
                         key: #key,
                         disps: &[#((#disps0, #disps1)),*],
                         atoms: &[#(#atoms_ref),*],
+                        #[allow(clippy::unreadable_literal)]
                         hashes: &[#(#hashes),*]
                     };
                     &SET
