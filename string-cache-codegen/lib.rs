@@ -255,9 +255,8 @@ impl AtomType {
             macro_rules! #macro_name {
                 #(
                     (#atoms_ref) => {
-                        #[allow(clippy::unreadable_literal)]
                         $crate::#path {
-                            unsafe_data: #data,
+                            unsafe_data: #[allow(clippy::unreadable_literal)] #data,
                             phantom: ::std::marker::PhantomData,
                         }
                     };
