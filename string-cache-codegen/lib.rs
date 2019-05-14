@@ -169,13 +169,14 @@ impl AtomType {
     /// Write generated code to `destination`.
     pub fn write_to<W>(&mut self, mut destination: W) -> io::Result<()> where W: Write {
         destination.write_all(
-            self.to_tokens()
+            ("#[allow(clippy::unreadable_literal)]\n".to_owned()+
+            &self.to_tokens()
             .to_string()
             // Insert some newlines to make the generated code slightly easier to read.
             .replace(" [ \"", "[\n\"")
             .replace("\" , ", "\",\n")
             .replace(" ( \"", "\n( \"")
-            .replace("; ", ";\n")
+            .replace("; ", ";\n"))
             .as_bytes())
     }
 
@@ -237,7 +238,6 @@ impl AtomType {
             pub struct #static_set_name;
             impl ::string_cache::StaticAtomSet for #static_set_name {
                 fn get() -> &'static ::string_cache::PhfStrSet {
-                    #[allow(clippy::unreadable_literal)]
                     static SET: ::string_cache::PhfStrSet = ::string_cache::PhfStrSet {
                         key: #key,
                         disps: &[#((#disps0, #disps1)),*],
@@ -256,7 +256,7 @@ impl AtomType {
                 #(
                     (#atoms_ref) => {
                         $crate::#path {
-                            unsafe_data: #[allow(clippy::unreadable_literal)] #data,
+                            unsafe_data: #data, 
                             phantom: ::std::marker::PhantomData,
                         }
                     };
