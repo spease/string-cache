@@ -169,7 +169,7 @@ impl AtomType {
     /// Write generated code to `destination`.
     pub fn write_to<W>(&mut self, mut destination: W) -> io::Result<()> where W: Write {
         destination.write_all(
-            ("#[allow(clippy::unreadable_literal)]\n".to_owned()+
+            ("#![allow(clippy::unreadable_literal)]\n".to_owned()+
             &self.to_tokens()
             .to_string()
             // Insert some newlines to make the generated code slightly easier to read.
